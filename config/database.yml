@@ -8,7 +8,7 @@ development:
   username: root
   password:
   host: localhost
-  database: prototype-40800_development
+  database: prototype_40800_development
 
 test:
   <<: *default
@@ -16,7 +16,7 @@ test:
   username: root
   password:
   host: localhost
-  database: prototype-40800_test
+  database: prototype_40800_test
 
 production:
   <<: *default
