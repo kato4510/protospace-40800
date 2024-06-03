@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
     @prototypes = Prototype.all
@@ -44,6 +45,13 @@ class PrototypesController < ApplicationController
   end
 
   private
+
+  def authorize_user!
+    @prototype = Prototype.find(params[:id])
+    unless @prototype.user == current_user
+      redirect_to root_path, alert: 'You are not authorized to perform this action.'
+    end
+  end
 
   def prototype_params
     params.require(:prototype).permit(:image, :title, :catch_copy, :concept).merge(user_id: current_user.id)
